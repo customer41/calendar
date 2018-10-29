@@ -2,19 +2,8 @@
 
 namespace app\models;
 
-use yii\base\Model;
-
-class Event extends Model
+class Event extends EventBase
 {
-    public $id;
-    public $title;
-    public $description;
-    public $start;
-    public $finish;
-    public $where;
-    public $repeat;
-    public $block;
-
     public function attributeLabels()
     {
         return [
@@ -22,17 +11,17 @@ class Event extends Model
             'description' => 'Описание события',
             'start' => 'Дата начала',
             'finish' => 'Дата завершения',
-            'where' => 'Место назначения',
-            'repeat' => 'Повтор события',
-            'block' => 'Блокировка события',
+            'address' => 'Место назначения',
+            'isRepeat' => 'Повтор события',
+            'isBlock' => 'Блокировка события',
         ];
     }
 
     public function rules()
     {
         return [
-            [['title', 'description', 'where'], 'required'],
-            [['repeat', 'block'], 'boolean'],
+            [['title', 'description', 'address'], 'required'],
+            [['isRepeat', 'isBlock'], 'boolean'],
             [['start', 'finish'], 'date', 'format' => 'php:Y-m-d H:i'],
             [['start', 'finish'], 'default', 'value' => date('Y-m-d H:i')],
             ['start', function() {

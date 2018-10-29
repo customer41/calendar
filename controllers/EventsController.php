@@ -9,39 +9,40 @@ class EventsController extends BaseController
 {
     public function actionOne($id = null)
     {
-        // получаем из БД...
-        // временная заглушка
-        $event = new Event();
-        $event->title = 'Курс по yii2';
-        $event->description = 'Изучение популярного фреймворка';
-        $event->start = '15.11.2018 20:00';
-        $event->finish = '15.12.2018 20:00';
-        $event->where = 'Дома у монитора';
-        $event->repeat = false;
-        $event->block = false;
-
+        $event = Event::findOne(['id' => $id]);
         return $this->render('one', ['event' => $event]);
     }
 
     public function actionCreate()
     {
         $event = new Event();
+        if (Yii::$app->request->isPost) {
+            $event->load(Yii::$app->request->post());
+            if ($event->validate()) {
+                $event->save();
+                return $this->redirect('/');
+            }
+        }
         return $this->render('create', ['event' => $event]);
     }
 
-    public function actionSave()
+    public function actionEdit($id = null)
     {
+        $event = Event::findOne(['id' => $id]);
         if (Yii::$app->request->isPost) {
-            $event = new Event();
-            $event->attributes = Yii::$app->request->post('Event');
+            $event->load(Yii::$app->request->post());
             if ($event->validate()) {
-                // сохраняем в БД...
-                /* временное решение */ return $this->redirect('/events/one');
-            } else {
-                return $this->render('create', ['event' => $event]);
+                $event->save();
+                return $this->redirect('/');
             }
-        } else {
-            return $this->redirect('/events/create');
         }
+        return $this->render('edit', ['event' => $event]);
+    }
+
+    public function actionDelete($id = null)
+    {
+        $event = Event::findOne(['id' => $id]);
+        $event->delete();
+        return $this->redirect('/');
     }
 }

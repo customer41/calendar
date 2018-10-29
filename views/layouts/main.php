@@ -63,6 +63,7 @@ AppAsset::register($this);
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
+        <?php echo \app\widgets\LastURL\LastURL::widget(); ?>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
