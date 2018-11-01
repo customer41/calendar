@@ -15,6 +15,10 @@ use Yii;
  * @property string $address
  * @property int $isRepeat
  * @property int $isBlock
+ * @property string $created
+ * @property int $userId
+ *
+ * @property User $user
  */
 class EventBase extends \yii\db\ActiveRecord
 {
@@ -32,10 +36,12 @@ class EventBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['title', 'userId'], 'required'],
             [['description'], 'string'],
-            [['start', 'finish'], 'safe'],
-            [['isRepeat', 'isBlock'], 'integer'],
+            [['start', 'finish', 'created'], 'safe'],
+            [['isRepeat', 'isBlock', 'userId'], 'integer'],
             [['title', 'address'], 'string', 'max' => 255],
+            //[['userId'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['userId' => 'id']],
         ];
     }
 
@@ -53,6 +59,16 @@ class EventBase extends \yii\db\ActiveRecord
             'address' => Yii::t('app', 'Address'),
             'isRepeat' => Yii::t('app', 'Is Repeat'),
             'isBlock' => Yii::t('app', 'Is Block'),
+            'created' => Yii::t('app', 'Created'),
+            'userId' => Yii::t('app', 'User ID'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'userId']);
     }
 }

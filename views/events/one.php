@@ -13,9 +13,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div>
     <h1><?= Html::encode($this->title) ?></h1>
-    <h2><?php echo $event->getAttributeLabel('title'); ?>: <?php echo $event->title; ?></h2>
-    <p><?php echo $event->getAttributeLabel('start'); ?>: <?php echo $event->start; ?></p>
-    <p><?php echo $event->getAttributeLabel('finish'); ?>: <?php echo $event->finish; ?></p>
+    <h4><?php echo $event->getAttributeLabel('title'); ?>: <?php echo $event->title; ?></h4>
+    <p><?php echo $event->getAttributeLabel('start'); ?>: <?php echo date('d-m-Y H:i', strtotime($event->start)); ?></p>
+    <p><?php echo $event->getAttributeLabel('finish'); ?>: <?php echo date('d-m-Y H:i', strtotime($event->finish)); ?></p>
     <p><?php echo $event->getAttributeLabel('description'); ?>: <?php echo $event->description; ?></p>
     <p><?php echo $event->getAttributeLabel('address'); ?>: <?php echo $event->address; ?></p>
     <p><?php echo $event->getAttributeLabel('isRepeat'); ?>:
@@ -30,5 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 </div>
 
-<?php echo Html::a('Редактировать', '/events/edit?id=' . $event->id, ['class' => 'btn btn-warning']); ?>
-<?php echo Html::a('Удалить', '/events/delete?id=' . $event->id, ['class' => 'btn btn-danger']); ?>
+<span><?php echo Html::a('Календарь', '/events/index', ['class' => 'btn btn-primary']); ?>  </span>
+<span><?php echo Html::a('Редактировать', '/events/edit?id=' . $event->id, ['class' => 'btn btn-warning']); ?>  </span>
+<span><?php echo Html::a('Удалить', '/events/delete?id=' . $event->id, ['class' => 'btn btn-danger']); ?></span>
