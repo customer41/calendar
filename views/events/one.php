@@ -13,11 +13,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div>
     <h1><?= Html::encode($this->title) ?></h1>
-    <h4><?php echo $event->getAttributeLabel('title'); ?>: <?php echo $event->title; ?></h4>
-    <p><?php echo $event->getAttributeLabel('start'); ?>: <?php echo date('d-m-Y H:i', strtotime($event->start)); ?></p>
-    <p><?php echo $event->getAttributeLabel('finish'); ?>: <?php echo date('d-m-Y H:i', strtotime($event->finish)); ?></p>
-    <p><?php echo $event->getAttributeLabel('description'); ?>: <?php echo $event->description; ?></p>
-    <p><?php echo $event->getAttributeLabel('address'); ?>: <?php echo $event->address; ?></p>
+    <h4><?php echo $event->getAttributeLabel('title'); ?>: <?php echo Html::encode($event->title); ?></h4>
+    <p><?php echo $event->getAttributeLabel('start'); ?>: <?php echo Yii::$app->formatter->asDatetime($event->start); ?></p>
+    <p><?php echo $event->getAttributeLabel('finish'); ?>: <?php echo Yii::$app->formatter->asDatetime($event->finish); ?></p>
+    <p><?php echo $event->getAttributeLabel('description'); ?>: <?php echo Html::encode($event->description); ?></p>
+    <p><?php echo $event->getAttributeLabel('address'); ?>: <?php echo Html::encode($event->address); ?></p>
     <p><?php echo $event->getAttributeLabel('isRepeat'); ?>:
         <?php if ($event->isRepeat): ?> Да
         <?php else: ?> Нет

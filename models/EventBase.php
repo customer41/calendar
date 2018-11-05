@@ -18,7 +18,7 @@ use Yii;
  * @property string $created
  * @property int $userId
  *
- * @property User $user
+ * @property MyUser $user
  */
 class EventBase extends \yii\db\ActiveRecord
 {
@@ -41,7 +41,7 @@ class EventBase extends \yii\db\ActiveRecord
             [['start', 'finish', 'created'], 'safe'],
             [['isRepeat', 'isBlock', 'userId'], 'integer'],
             [['title', 'address'], 'string', 'max' => 255],
-            //[['userId'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['userId' => 'id']],
+            //[['userId'], 'exist', 'skipOnError' => true, 'targetClass' => MyUser::className(), 'targetAttribute' => ['userId' => 'id']],
         ];
     }
 
@@ -69,6 +69,6 @@ class EventBase extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'userId']);
+        return $this->hasOne(MyUser::className(), ['id' => 'userId']);
     }
 }

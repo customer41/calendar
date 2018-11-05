@@ -33,18 +33,18 @@ $this->params['breadcrumbs'][] = $this->title;
             <tr>
                 <td>
                     <span class="glyphicon glyphicon-calendar">
-                        <?php echo date('d-m-Y', strtotime($event->start)); ?>
+                        <?php echo Yii::$app->formatter->asDate($event->start); ?>
                     </span>
                 </td>
                 <td>
-                    <?php echo Html::a($event->title, '/events/one?id=' . $event->id); ?>
+                    <?php echo Html::a(Html::encode($event->title), '/events/one?id=' . $event->id); ?>
                     <?php echo Html::a('<span class="glyphicon glyphicon-edit"></span>', '/events/edit?id=' . $event->id); ?>
                     <?php echo Html::a('<span class="glyphicon glyphicon-trash"></span>', '/events/delete?id=' . $event->id); ?>
                 </td>
-                <td><?php echo $event->description; ?></td>
-                <td><?php echo date('d-m-Y H:i', strtotime($event->start)); ?></td>
-                <td><?php echo date('d-m-Y H:i', strtotime($event->finish)); ?></td>
-                <td><?php echo $event->address; ?></td>
+                <td><?php echo Html::encode($event->description); ?></td>
+                <td><?php echo Yii::$app->formatter->asDatetime($event->start); ?></td>
+                <td><?php echo Yii::$app->formatter->asDatetime($event->finish); ?></td>
+                <td><?php echo Html::encode($event->address); ?></td>
                 <td><?php echo $event->isRepeat ? 'Да' : 'Нет'; ?></td>
                 <td><?php echo $event->isBlock ? 'Да' : 'Нет'; ?></td>
             </tr>

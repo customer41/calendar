@@ -23,12 +23,23 @@ class Event extends EventBase
     public function rules()
     {
         return ArrayHelper::merge([
-            [['description', 'address'], 'required'],
+            [['description', 'address', 'start'], 'required'],
             [['isRepeat', 'isBlock'], 'boolean'],
-            [['start', 'finish'], 'date', 'format' => 'php:Y-m-d H:i'],
-            [['start', 'finish'], 'default', 'value' => date('Y-m-d H:i')],
+            [['start', 'finish'], 'datetime'],
+            ['start', 'filter', 'filter' => function($value) {
+                return \Yii::$app->formatter->asDatetime($value, 'yyyy-MM-dd HH:mm');
+            }],
+            ['finish', 'default', 'value' => function($model, $attribute) {
+                return $model->$attribute = $model->start;
+            }],
+            ['finish', 'filter', 'filter' => function($value) {
+                    return \Yii::$app->formatter->asDatetime($value, 'yyyy-MM-dd HH:mm');
+                }, 'when' => function($model) {
+                    return null != $model->finish;
+            }],
             ['start', function () {
                 if (strtotime($this->start) > strtotime($this->finish)) {
+
                     $this->addError('start', '"Дата начала" больше "даты завершения"');
                     $this->addError('finish', '"Дата завершения" меньше "даты начала"');
                 }

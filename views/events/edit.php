@@ -19,8 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php $form = ActiveForm::begin(['method' =>'POST', 'action' => '/events/edit?id=' . $event->id]); ?>
     <?php echo $form->field($event, 'title'); ?>
     <?php echo $form->field($event, 'description')->textarea(); ?>
-    <?php echo $form->field($event, 'start')->textInput(['value' => date('Y-m-d H:i'), strtotime($event->start)]); ?>
-    <?php echo $form->field($event, 'finish')->textInput(['value' => date('Y-m-d H:i'), strtotime($event->finish)]); ?>
+    <?php echo $form->field($event, 'start')->textInput(['value' => Yii::$app->formatter->asDatetime($event->start)]); ?>
+    <?php echo $form->field($event, 'finish')->textInput(['value' => Yii::$app->formatter->asDatetime($event->finish)]); ?>
     <?php echo $form->field($event, 'address'); ?>
     <?php echo $form->field($event, 'isRepeat')->checkbox(); ?>
     <?php echo $form->field($event, 'isBlock')->checkbox(); ?>

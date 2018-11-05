@@ -8,8 +8,9 @@ class m181031_121602_fillUsersAndEventsTables extends Migration
     {
         $this->insert('users', [
             'id' => 1,
-            'username' => 'Пользователь 1',
-            'password' => 'fdlnvuir',
+            'username' => 'Администратор',
+            'password' => '$2y$13$VxW3somYg4I7dmelTjO8G.o7GaDXg/sa6zUQpTogvIuDF/Jh6w6K2',
+            'authKey' => 'xHNLCwEx3JqiZlv56xawayXPAuXMmMQx',
             'email' => 'test@test.com',
         ]);
         $this->batchInsert('events', ['title', 'description', 'start', 'finish', 'address', 'isRepeat', 'isBlock', 'userId'], [
@@ -19,7 +20,7 @@ class m181031_121602_fillUsersAndEventsTables extends Migration
             ['Событие 4', 'Описание события 4', '2018-11-02 10:00', '2018-11-02 16:00', 'Адресс события 4', 0, 1, 1],
             ['Событие 5', 'Описание события 5', '2018-11-03 11:00', '2018-11-03 12:00', 'Адресс события 5', 0, 0, 1],
             ['Событие 6', 'Описание события 6', '2018-11-03 17:00', '2018-11-03 20:00', 'Адресс события 6', 0, 0, 1],
-            ['Событие 7', 'Описание события 7', '2018-11-04 12:00', '2018-11-05 12:00', 'Адресс события 7', 0, 1, 1],
+            ['Событие 7', 'Описание события 7', '2018-11-04 12:00', '2018-11-05 12:00', 'Адресс события 7', 0, 0, 1],
             ['Событие 8', 'Описание события 8', '2018-11-06 08:00', '2018-11-06 10:00', 'Адресс события 8', 0, 0, 1],
             ['Событие 9', 'Описание события 9', '2018-11-07 14:00', '2018-11-08 16:00', 'Адресс события 9', 0, 0, 1],
             ['Событие 10', 'Описание события 10', '2018-11-10 12:00', '2018-11-10 21:00', 'Адресс события 10', 0, 0, 1],
@@ -28,7 +29,8 @@ class m181031_121602_fillUsersAndEventsTables extends Migration
 
     public function safeDown()
     {
-        $this->truncateTable('users');
+        $this->dropForeignKey('userEvent', 'events');
         $this->truncateTable('events');
+        $this->truncateTable('users');
     }
 }

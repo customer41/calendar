@@ -4,12 +4,13 @@ namespace app\controllers;
 
 use app\models\Event;
 use Yii;
+use yii\helpers\Html;
 
 class EventsController extends BaseController
 {
     public function actionIndex()
     {
-        $events = Event::find()->all();
+        $events = Event::find()->orderBy('start')->all();
         return $this->render('index', ['events' => $events]);
     }
 
@@ -25,8 +26,7 @@ class EventsController extends BaseController
         if (Yii::$app->request->isPost) {
             $event->load(Yii::$app->request->post());
             $event->userId = 1;
-            if ($event->validate()) {
-                $event->save();
+            if ($event->save()) {
                 return $this->redirect('/events/index');
             }
         }
@@ -38,8 +38,7 @@ class EventsController extends BaseController
         $event = Event::findOne(['id' => $id]);
         if (Yii::$app->request->isPost) {
             $event->load(Yii::$app->request->post());
-            if ($event->validate()) {
-                $event->save();
+            if ($event->save()) {
                 return $this->redirect('/events/index');
             }
         }
