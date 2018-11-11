@@ -6,13 +6,11 @@ class m181031_121602_fillUsersAndEventsTables extends Migration
 {
     public function safeUp()
     {
-        $this->insert('users', [
-            'id' => 1,
-            'username' => 'Администратор',
-            'password' => '$2y$13$VxW3somYg4I7dmelTjO8G.o7GaDXg/sa6zUQpTogvIuDF/Jh6w6K2',
-            'authKey' => 'xHNLCwEx3JqiZlv56xawayXPAuXMmMQx',
-            'email' => 'test@test.com',
+        $this->batchInsert('users', ['id', 'username', 'password', 'authKey', 'email'], [
+            [1, 'Администратор', '$2y$13$VxW3somYg4I7dmelTjO8G.o7GaDXg/sa6zUQpTogvIuDF/Jh6w6K2', 'xHNLCwEx3JqiZlv56xawayXPAuXMmMQx', 'test@test.com'],
+            [2, 'Пользователь', '$2y$13$S/YTBpPIuN9XOROUV4Ufbegnd/Kv0cBog7oAlzM9aPUPqtn0SbxkC', 'CgaQvJ_h64hnblbv5ZsQFcnbUKaA3KY4', 'mail@tmail.ru'],
         ]);
+
         $this->batchInsert('events', ['title', 'description', 'start', 'finish', 'address', 'isRepeat', 'isBlock', 'userId'], [
             ['Событие 1', 'Описание события 1', '2018-10-31 12:00', '2018-10-31 15:00', 'Адресс события 1', 0, 0, 1],
             ['Событие 2', 'Описание события 2', '2018-10-31 18:00', '2018-10-31 20:00', 'Адресс события 2', 0, 0, 1],
@@ -24,6 +22,8 @@ class m181031_121602_fillUsersAndEventsTables extends Migration
             ['Событие 8', 'Описание события 8', '2018-11-06 08:00', '2018-11-06 10:00', 'Адресс события 8', 0, 0, 1],
             ['Событие 9', 'Описание события 9', '2018-11-07 14:00', '2018-11-08 16:00', 'Адресс события 9', 0, 0, 1],
             ['Событие 10', 'Описание события 10', '2018-11-10 12:00', '2018-11-10 21:00', 'Адресс события 10', 0, 0, 1],
+            ['Событие 11', 'Описание события 11', '2018-11-11 14:00', '2018-11-11 16:00', 'Адресс события 11', 0, 0, 2],
+            ['Событие 12', 'Описание события 12', '2018-11-11 18:00', '2018-11-11 21:00', 'Адресс события 11', 0, 0, 2],
         ]);
     }
 

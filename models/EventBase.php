@@ -16,6 +16,7 @@ use Yii;
  * @property int $isRepeat
  * @property int $isBlock
  * @property string $created
+ * @property string $updated
  * @property int $userId
  *
  * @property MyUser $user
@@ -38,7 +39,7 @@ class EventBase extends \yii\db\ActiveRecord
         return [
             [['title', 'userId'], 'required'],
             [['description'], 'string'],
-            [['start', 'finish', 'created'], 'safe'],
+            [['start', 'finish', 'created', 'updated'], 'safe'],
             [['isRepeat', 'isBlock', 'userId'], 'integer'],
             [['title', 'address'], 'string', 'max' => 255],
             //[['userId'], 'exist', 'skipOnError' => true, 'targetClass' => MyUser::className(), 'targetAttribute' => ['userId' => 'id']],
@@ -51,16 +52,17 @@ class EventBase extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'title' => Yii::t('app', 'Title'),
-            'description' => Yii::t('app', 'Description'),
-            'start' => Yii::t('app', 'Start'),
-            'finish' => Yii::t('app', 'Finish'),
-            'address' => Yii::t('app', 'Address'),
-            'isRepeat' => Yii::t('app', 'Is Repeat'),
-            'isBlock' => Yii::t('app', 'Is Block'),
-            'created' => Yii::t('app', 'Created'),
-            'userId' => Yii::t('app', 'User ID'),
+            'id' => 'ID',
+            'title' => 'Title',
+            'description' => 'Description',
+            'start' => 'Start',
+            'finish' => 'Finish',
+            'address' => 'Address',
+            'isRepeat' => 'Is Repeat',
+            'isBlock' => 'Is Block',
+            'created' => 'Created',
+            'updated' => 'Updated',
+            'userId' => 'User ID',
         ];
     }
 

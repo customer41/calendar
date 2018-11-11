@@ -135,6 +135,9 @@ class SiteController extends BaseController
             $post['authKey'] = Yii::$app->security->generateRandomString();
             $user->attributes = $post;
             if ($user->save()) {
+                $authManager = Yii::$app->authManager;
+                $userRole = $authManager->getRole('user');
+                $authManager->assign($userRole, $user->id);
                 return $this->redirect('/');
             }
         }

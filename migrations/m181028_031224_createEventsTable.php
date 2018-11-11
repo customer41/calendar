@@ -16,6 +16,7 @@ class m181028_031224_createEventsTable extends Migration
             'isRepeat' => $this->boolean()->notNull()->defaultValue(0),
             'isBlock' => $this->boolean()->notNull()->defaultValue(0),
             'created' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
         ]);
     }
 

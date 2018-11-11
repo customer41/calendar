@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\behaviors\FillFieldsBehavior;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
 
@@ -17,6 +18,17 @@ class Event extends EventBase
             'address' => 'Место назначения',
             'isRepeat' => 'Повтор события',
             'isBlock' => 'Блокировка события',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'fillFields' => [
+                'class' => FillFieldsBehavior::class,
+                'created' => 'created',
+                'updated' => 'updated',
+            ]
         ];
     }
 

@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h2>Календарь событий</h2>
     <table class="table table-bordered table-hover table-condensed">
         <tr>
-            <td><?php echo 'Дата'; ?></td>
+            <td>Дата</td>
             <td><?php echo $events[0]->getAttributeLabel('title'); ?></td>
             <td><?php echo $events[0]->getAttributeLabel('description'); ?></td>
             <td><?php echo $events[0]->getAttributeLabel('start'); ?></td>
@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <td><?php echo $events[0]->getAttributeLabel('address'); ?></td>
             <td><?php echo $events[0]->getAttributeLabel('isRepeat'); ?></td>
             <td><?php echo $events[0]->getAttributeLabel('isBlock'); ?></td>
+            <td>Пользователь</td>
         </tr>
         <?php foreach ($events as $event): ?>
             <tr>
@@ -47,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <td><?php echo Html::encode($event->address); ?></td>
                 <td><?php echo $event->isRepeat ? 'Да' : 'Нет'; ?></td>
                 <td><?php echo $event->isBlock ? 'Да' : 'Нет'; ?></td>
+                <td><?php echo $event->user->username; ?></td>
             </tr>
         <?php endforeach; ?>
     </table>

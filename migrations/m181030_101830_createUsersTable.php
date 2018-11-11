@@ -15,6 +15,7 @@ class m181030_101830_createUsersTable extends Migration
             'email' => $this->string(),
             'status' => $this->integer()->notNull()->defaultValue(0),
             'created' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
         ]);
     }
 
